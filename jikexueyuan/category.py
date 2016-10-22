@@ -14,11 +14,21 @@ def creatsqlit():
         con.commit()  #在创建的连接对象上提交
 
 def initsqlit():
-        con=sqlite3.connect("coursei_category.db")
+        con=sqlite3.connect("course_category.db")
         cur=con.cursor()
         cur.execute("DROP TABLE coursedata")
         cur.execute("CREATE TABLE coursedata(id integer primary KEY ,name char ,category varchar,category_son varchar,category_grson varchar,aim_url varchar,desc_text varchar,lean_num integer,time varchar,dgrees varchar)")
         con.commit()
+'''
+def get_pagenum():
+    ba_url="http://www.jikexueyuan.com/course/android"
+    r=requests.get(url=ba_url)
+    r=r.content
+    soup=BeautifulSoup(r.content,"html5lib")
+    pagetotal=soup.find("div",id="page-nav")
+    print(soup)
+    print(pagetotal.contents)
+    '''
 
 def addtosqlite(course_info):
         name=course_info["name"]
@@ -39,6 +49,7 @@ def addtosqlite(course_info):
         print("插入数据成功！")
         con.commit()
 
+#在分类页面爬取信息
 def main_spider(href,text):
     r=requests.get(url=href)
     soup=BeautifulSoup(r.content,"html5lib")
@@ -65,7 +76,7 @@ def main_spider(href,text):
             print(course_info)
             addtosqlite(course_info)
 
-
+#获取分类信息
 def get_cate():
     url="http://www.jikexueyuan.com/course/"
     r=requests.get(url=url)
@@ -97,5 +108,6 @@ if __name__ == '__main__':
     #creatsqlit()
     initsqlit()
     get_cate()
+    #get_pagenum()
     endtime=datetime.now()
     print("耗时：",(endtime-starttime).seconds,"秒")

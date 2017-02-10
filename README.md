@@ -16,3 +16,7 @@
 ## OJ_info  OJ题目信息爬取
 
 爬取OJ上的题目存为便于写博客的.md文件，支持POJ、HDOJ、XCOJ（[合工大宣OJ](http://xcacm.hfut.edu.cn/problemset.php)）
+
+## 夏说英文中文章信息爬取
+
+[夏说英语](http://www.ximalaya.com/23508288/album/4541211)每集文章信息爬取，生成.md文件
